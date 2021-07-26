@@ -1,0 +1,20 @@
+<h2>courses-lis</h2>
+<div class="container">
+<table class="table">
+    <thead>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Availability</th>
+        
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of courseList">
+        <th scope="row">1</th>
+        <td>{{contact.ID}}</td>
+        <td>{{contact.name}}</td>
+        <td>{{contact.Availability}}</td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
