@@ -13,8 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoursesModule,
-    StudentsModule,
+
+    // There's no need to import the feature module because they are being used in router
+    // CoursesModule,
+    // StudentsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
@@ -23,3 +25,6 @@ import { HttpClientModule } from '@angular/common/http';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// Check this article to learn more about lazy loading modules
+// https://www.freecodecamp.org/news/lazy-loading-in-angular-intro-to-ngmodules/
