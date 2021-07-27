@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CoursesModule } from './courses/courses.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StudentsModule } from './students/students.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { StudentsService } from './service/students.service';
 @NgModule({
   declarations: [
     AppComponent
@@ -13,15 +12,11 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-
-    // There's no need to import the feature module because they are being used in router
-    // CoursesModule,
-    // StudentsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [StudentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

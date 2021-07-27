@@ -1,3 +1,28 @@
-<p>students-list-view works!</p>
+<h2>Student-list</h2>
+<div class="container">         
+    <table class="table table-hover"*ngIf='users'>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Phone Number</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let item of users'>
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.address }}</td>
+          <td>{{ item.phone }}</td>
+          <td><a routerLink="/edit" class="btn btn-info" >Edit</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+
+  
 <app-student-dialog></app-student-dialog>
-<app-edit-student-dialog></app-edit-student-dialog>
+

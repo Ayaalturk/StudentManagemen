@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactService } from 'src/app/service/contact.service';
 
 @Component({
   selector: 'app-courses-list-view',
@@ -7,15 +6,13 @@ import { ContactService } from 'src/app/service/contact.service';
   styleUrls: ['./courses-list-view.component.css']
 })
 export class CoursesListViewComponent implements OnInit {
+ 
 
-  constructor(private contactService:ContactService) { }
+  constructor(){}
 
   ngOnInit(): void {
-  }
-  get courseList() {
-
     
-    return this.contactService.getAllContacts();
+    
+    
+    }
   }
-
-}

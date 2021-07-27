@@ -4,11 +4,13 @@ import { StudentsListViewComponent } from './students-list-view/students-list-vi
 import { StudentDialogComponent } from './student-dialog/student-dialog.component';
 import { EditStudentDialogComponent } from './edit-student-dialog/edit-student-dialog.component';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
-    path: '', component: StudentsListViewComponent
+    path: '', component: StudentsListViewComponent,
   },
+  {path:'edit',component: EditStudentDialogComponent,} 
 ];
 
 @NgModule({
@@ -17,15 +19,11 @@ const routes: Routes = [
     StudentDialogComponent,
     EditStudentDialogComponent,
   ],
-  exports: [
-    // No need to export when using module as route
-    /*   StudentsListViewComponent,
-      StudentDialogComponent,
-      EditStudentDialogComponent */
-  ],
+ 
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FormsModule,
 
   ]
 })
