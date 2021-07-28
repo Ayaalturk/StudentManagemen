@@ -4,13 +4,13 @@ import { StudentsListViewComponent } from './students-list-view/students-list-vi
 import { StudentDialogComponent } from './student-dialog/student-dialog.component';
 import { EditStudentDialogComponent } from './edit-student-dialog/edit-student-dialog.component';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
     path: '', component: StudentsListViewComponent,
   },
-  {path:'edit',component: EditStudentDialogComponent,} 
+  {path:'user/edit/:id',component: EditStudentDialogComponent,} 
 ];
 
 @NgModule({
@@ -24,25 +24,15 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
+    ReactiveFormsModule,
+  
 
   ]
 })
-export class StudentsModule {
+export class StudentsModule {}
   // Dont Add Code in module creation
   // Check this ref for more info https://angular.io/guide/feature-modules
-  /*  public name: string;
-   public Id: number;
-   public PhonNumber: number;
-   public Address: string;
-   public TakenCourses:courses[]
-
-   constructor(Name:string, id: number, Phone:number,Address:string,Taken:courses[]){
-     this.name =Name;
-     this.Id = id;
-     this.PhonNumber =Phone;
-     this.Address =Address;
-     this.TakenCourses =Taken;} */
-}
+  
 
 
 

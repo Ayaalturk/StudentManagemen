@@ -28,7 +28,7 @@ updateForm!: FormGroup;
       // update case
       if(typeof params['id'] !== "undefined") {
       let id = Number.parseInt(params['id']);
-      this.studenesService.getUsers("https://jsonplaceholder.typicode.com/users")
+      this.studenesService.getusers("https://jsonplaceholder.typicode.com/users")
       .subscribe(
       response => {
       this.user = response;

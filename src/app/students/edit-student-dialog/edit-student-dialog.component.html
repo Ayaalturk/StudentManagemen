@@ -1,20 +1,22 @@
-<h2>Update user Form </h2>
-<form *ngIf="user" formGroup="_updateForm" (ngSubmit)="onSubmit(updateForm.value)">
+<form *ngIf="user" [formGroup]="updateForm" (ngSubmit)="onSubmit(updateForm.value)">
  
     <div class="form-group">
-      <label>Name</label>
-      <input [(ngModel)]="user.name" class="form-control"  formControl="updateForm.controls['name']">
-     </div>
+        <label>Name</label>
+        <input [(ngModel)]="user.name" class="form-control"
+        formControlName="name" placeholder="Name">
+ </div>
 
-     <div class="form-group">
-        <label>Address</label>
-        <input [(ngModel)]="user.address" class="form-control" formControl="updateForm.controls['address']">
+       <div class="form-group">
+         <label>Address</label>
+         <input [(ngModel)]="user.address" class="form-control"
+         formControlName="address" placeholder="Address">
        </div>
 
 
      <div class="form-group">
             <label>Phone</label>
-            <input [(ngModel)]="user.phone" class="form-control" formControl="updateForm.controls['phone']" >
+            <input [(ngModel)]="user.phone" class="form-control"
+            formControlName="phone" placeholder="Phone" >
      </div>
 
      <button type="submit" [disabled]="!updateForm.valid ">submit </button>

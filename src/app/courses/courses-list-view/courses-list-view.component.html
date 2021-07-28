@@ -1,18 +1,26 @@
 <h2>courses-list</h2>
 <div class="container">
-  <table class="table">
+  <table class="table table-hover">
     <thead>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
-      <th scope="col">Availability</th>
+      <th scope="col">Number of registered students</th> 
+      <th scope="col">Add</th>
 
     </thead>
     <tbody>
-      <tr *ngFor="let contact ">
-        <th scope="row">1</th>
-        <td>{{contact.ID}}</td>
+      <tr *ngFor="let contact of course ">
+        
+        <td>{{contact.id}}</td>
         <td>{{contact.name}}</td>
-        <td>{{contact.Availability}}</td>
+        <td>{{contact.postId}}</td>
+        <td><button type="button" class="btn btn-danger"
+            (click)="getMessage()"
+             *ngIf="contact.postId> 10 ;else open"> unavailable </button> 
+             <ng-template #open><button  type="button" class="btn btn-success"
+                (click)="addOnstudents()">Available</button></ng-template>
+        </td>
+        <td><a [routerLink]="['/course/edit', course.id ]" class="btn btn-info" >Edit</a></td>
       </tr>
 
     </tbody>
