@@ -19,7 +19,8 @@ updateForm!: FormGroup;
 
   constructor(public formBuilder:FormBuilder,
     public studenesService:StudentsService,
-    protected activatedRoute:ActivatedRoute,) {
+    protected activatedRoute:ActivatedRoute,)
+     {
       this.createForm();
      }
 
@@ -45,7 +46,7 @@ updateForm!: FormGroup;
   public createForm(){
     this.updateForm = this.formBuilder.group({
     name: ['', Validators.required],
-    address: ['', Validators.required],
+    email: ['', Validators.required],
     phone: ['', Validators.required],
     });
   }
@@ -54,10 +55,10 @@ updateForm!: FormGroup;
     onSubmit(elementValues: any) { 
       let id:number = this.user.id;
       this.submitted = false;
-      let url ="https://jsonplaceholder.typicode.com/users"
+      let url ="https://jsonplaceholder.typicode.com/users/1"
       let data:any = {
       "name": elementValues.name,
-      "address": elementValues.address,
+      "email": elementValues.email,
       "phone": elementValues.Phone,
       };
       

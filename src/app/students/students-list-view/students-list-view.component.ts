@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { courses } from 'src/app/courses/courses.model';
+import { SharedService } from 'src/app/service/shared.service';
 import { StudentsService } from 'src/app/service/students.service';
 
 @Component({
@@ -8,11 +10,13 @@ import { StudentsService } from 'src/app/service/students.service';
 })
 export class StudentsListViewComponent implements OnInit {
   public users:any;
+  Available!:courses[];
  
 
-  constructor(public studentsService:StudentsService,) {  }
+  constructor(public studentsService:StudentsService,public sharedService:SharedService) { }
   
   ngOnInit(): void {
+
     this.studentsService.getusers('https://jsonplaceholder.typicode.com/users')
     .subscribe(
     result => {
@@ -22,5 +26,11 @@ export class StudentsListViewComponent implements OnInit {
     error => {
     console.log(error);
     });
-    }
-  }
+
+    this.Available= this.sharedService.getAvailableCourse()
+
+ }
+
+
+  
+}

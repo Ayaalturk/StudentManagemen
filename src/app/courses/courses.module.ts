@@ -6,11 +6,14 @@ import { EditCourseDialogComponent } from './edit-course-dialog/edit-course-dial
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 const routes: Routes = [
   {
     path: '', component: CoursesListViewComponent
   },
-  {path:'course/edit/:id',component: EditCourseDialogComponent,} 
+  { path:'course/edit/:id',component: EditCourseDialogComponent,} ,
+  { path:'Add-dialog',component: NewCourseDialogComponent,} 
+  
 ];
 
 @NgModule({
@@ -25,6 +28,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
 
   ]
 })

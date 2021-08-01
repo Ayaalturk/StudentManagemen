@@ -1,1 +1,28 @@
-<p>edit-course-dialog works!</p>
+<form *ngIf="course" [formGroup]="updateForm" (ngSubmit)="onSubmit(updateForm.value)">
+ 
+    <div class="form-group">
+        <label>ID</label>
+        <input [(ngModel)]="course.ID" class="form-control"
+        formControlName="ID" placeholder="ID">
+ </div>
+
+    <div class="form-group">
+        <label>Name</label>
+        <input [(ngModel)]="course.name" class="form-control"
+        formControlName="name" placeholder="name">
+    </div>
+
+
+    <div class="form-group">
+        <label>	Number of registered students</label>
+        <input [(ngModel)]="course.number" class="form-control"
+        formControlName="number" placeholder="number" >
+    </div>
+
+    <button type="submit" [disabled]="!updateForm.valid ">submit </button>
+</form>
+
+
+<div class="container">
+    <button type="button" class="btn btn-info btn-block" routerLink="/Add-dialog">ADD COURSE DIALOG</button>
+  </div>

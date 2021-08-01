@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { StudentsService } from './service/students.service';
 import { CoursesService } from './service/courses.service';
+import { SharedService } from './service/shared.service';
 @NgModule({
   declarations: [
     AppComponent
@@ -17,10 +18,8 @@ import { CoursesService } from './service/courses.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [StudentsService,CoursesService],
+  providers: [StudentsService,CoursesService,SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
-// Check this article to learn more about lazy loading modules
-// https://www.freecodecamp.org/news/lazy-loading-in-angular-intro-to-ngmodules/

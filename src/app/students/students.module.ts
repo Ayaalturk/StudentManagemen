@@ -5,12 +5,14 @@ import { StudentDialogComponent } from './student-dialog/student-dialog.componen
 import { EditStudentDialogComponent } from './edit-student-dialog/edit-student-dialog.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
     path: '', component: StudentsListViewComponent,
   },
-  {path:'user/edit/:id',component: EditStudentDialogComponent,} 
+  {path:'user/edit/:id',component: EditStudentDialogComponent,} ,
+  {path:'dialog',component: StudentDialogComponent,}
 ];
 
 @NgModule({
@@ -25,6 +27,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule
   
 
   ]

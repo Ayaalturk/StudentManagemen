@@ -1,8 +1,10 @@
-export class courses{
+export interface courses{
+  ID:number;
+  name:string; 
+  Availability:string ;} 
 
-    constructor( public ID:number, public name:string, public Availability:string){}
+
    
    
 
     
-}

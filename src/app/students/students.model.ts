@@ -1,7 +1,7 @@
 export interface students{
     ID:number;
     Name:string;
-    Address:string;
+    Email:string;
     Phone: number;
 
 
