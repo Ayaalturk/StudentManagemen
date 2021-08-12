@@ -15,16 +15,20 @@ export class CoursesService {
     .pipe(
     map(data => data) 
     );
-    }
+ }
 
-    public update(url:any , data:any) {
-      return this.http
-      .put(url , data )
-      .pipe(
-      map((response) => {
-      return response;
-      })
-      );
-      }
-    
+  public update(url:any , data:any) {
+    return this.http
+    .put(url , data )
+    .pipe(
+    map((response) => {
+    return response;
+    })
+    );
+  }
+
+  deleteCourse(id:number){
+    return this.http.delete('https://jsonplaceholder.typicode.com/posts/1'+id)
+  }
+  
 }

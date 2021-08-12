@@ -11,26 +11,30 @@ import { StudentsService } from 'src/app/service/students.service';
 export class StudentsListViewComponent implements OnInit {
   public users:any;
   Available!:courses[];
- 
+  isLoading = false;
+  
 
   constructor(public studentsService:StudentsService,public sharedService:SharedService) { }
   
   ngOnInit(): void {
-
+    this.isLoading =true;
     this.studentsService.getusers('https://jsonplaceholder.typicode.com/users')
     .subscribe(
     result => {
-    let response:any = result;
-    this.users = response; 
+      this.isLoading =false;
+     let response:any = result;
+     this.users = response; 
     },
     error => {
     console.log(error);
     });
 
     this.Available= this.sharedService.getAvailableCourse()
-
- }
-
-
-  
+  }
 }
+ 
+
+ 
+ 
+  
+

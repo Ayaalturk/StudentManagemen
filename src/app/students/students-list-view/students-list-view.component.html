@@ -1,34 +1,58 @@
-<h2>Student-list</h2>
-<div class="container">         
-    <table class="table table-hover"*ngIf='users'>
-      <thead>
+<div class="container">   
+  <p *ngIf="isLoading">Loading<i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i></p>
+  <app-student-dialog></app-student-dialog>
+  <br>
+
+  <p-table [value]="users">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        Student list
+      </div>
+    </ng-template>
+
+    <!--table class="table table-hover"*ngIf='users'>
+      <thead-->
+        <ng-template pTemplate="header">
         <tr>
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
           <th>Phone Number</th>
           <th>Course Taken</th>
+          <th>Action</th>
          
           
         </tr>
-      </thead>
+      </ng-template>
+      <!--/thead>
       <tbody>
-        <tr *ngFor='let item of users'>
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.phone }}</td>
-          <td>{{Available}}</td>
-          <td><a [routerLink]="['/user/edit', users.id ]" class="btn btn-info" >Edit</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <router-outlet></router-outlet>
+        <tr *ngFor='let item of users'-->
+    <ng-template pTemplate="body" let-item>
+              <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.phone }}</td>
+            <td>{{Available}}</td>
+            <td><app-edit-student-dialog></app-edit-student-dialog></td>
+          </tr>
+        <!--/tbody>
+      </table-->
+   </ng-template>
 
-  <div class="container">
-    <button type="button" class="btn btn-info btn-block" routerLink="/dialog">STUDENT DIALOG</button>
-  </div>
+
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{users ? users.length : 0 }} students.
+      </div>
+   </ng-template>
+  
+  </p-table>
+</div>
+
+      
+  
+
   
 
 

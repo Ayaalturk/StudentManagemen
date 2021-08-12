@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StudentsService } from 'src/app/service/students.service'; 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { students } from '../students.model';
 
 @Component({
   selector: 'app-edit-student-dialog',
@@ -10,37 +11,38 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditStudentDialogComponent implements OnInit {
   
-public title = 'Update User';
+  public title = 'Update User';
 
-updateForm!: FormGroup; 
- submitted:boolean = false;
- user:any;
- errorMessage:any;
+  updateForm!: FormGroup; 
+  submitted:boolean = false;
+  user:any;
+  errorMessage:any;
+  display: boolean = false;
 
   constructor(public formBuilder:FormBuilder,
     public studenesService:StudentsService,
-    protected activatedRoute:ActivatedRoute,)
-     {
-      this.createForm();
-     }
+    protected activatedRoute:ActivatedRoute,
+    private router:Router) {
+    this.createForm();
+ }
 
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      // update case
-      if(typeof params['id'] !== "undefined") {
-      let id = Number.parseInt(params['id']);
-      this.studenesService.getusers("https://jsonplaceholder.typicode.com/users")
-      .subscribe(
-      response => {
-      this.user = response;
-      console.log(this.user);
-      },
-      error => {
-      this.errorMessage = error.data.message;
-      }
-      );
-      }
-      });
+  ngOnInit(): void { 
+   this.activatedRoute.params.subscribe(params => {
+    // update case
+    if(typeof params['id'] !== "undefined") {
+    let id = Number.parseInt(params['id']);
+    this.studenesService.getusers("https://jsonplaceholder.typicode.com/users")
+    .subscribe(
+    response => {
+    this.user = response;
+    console.log(this.user);
+    },
+    error => {
+    this.errorMessage = error.data.message;
+    }
+    );
+    }
+    });
   }
 
   public createForm(){
@@ -50,29 +52,49 @@ updateForm!: FormGroup;
     phone: ['', Validators.required],
     });
   }
-    
-    
-    onSubmit(elementValues: any) { 
-      let id:number = this.user.id;
-      this.submitted = false;
-      let url ="https://jsonplaceholder.typicode.com/users/1"
-      let data:any = {
-      "name": elementValues.name,
-      "email": elementValues.email,
-      "phone": elementValues.Phone,
-      };
       
-      this.studenesService.update(url,data)
-      .subscribe(
-      result => {
-      this.submitted = true;
-      this.user = data;
-      alert('success : User Updated ');
-      },
-      error => {
-      this.submitted = true;
-      this.errorMessage = error;
-      }
-      );
-      }
+      
+ /* onSubmit(elementValues: any) { 
+    let id:number = this.user.id;
+    this.submitted = false;
+    let url ="https://jsonplaceholder.typicode.com/users/1"
+    let data:any = {
+    "name": elementValues.name,
+    "email": elementValues.email,
+    "phone": elementValues.Phone,
+    };
+    
+    this.studenesService.update(url,data)
+    .subscribe(
+    result => {
+    this.submitted = true;
+    this.user = data;
+    alert('success : User Updated ');
+    },
+    error => {
+    this.submitted = true;
+    this.errorMessage = error;
+    }
+    );
+  }*/
+
+  onSubmit(data:students){
+    this.studenesService.update('https://jsonplaceholder.typicode.com/users/1',data)
+    .subscribe((result)=>{
+    console.warn("result",result)})
+    console.warn(data)
+    this.display =false;
+    
+
+  }
+
+
+  goList(){
+    this.router.navigate(['student'])
+  }
+
+  showDialog() {
+    this.display = true;}
+
+      
 }

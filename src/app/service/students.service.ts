@@ -14,15 +14,15 @@ export class StudentsService {
     .pipe(
     map(res => res) 
     );
-    }
+  }
     
-    public update(url:any , data:any) {
-      return this.httpClient
-      .put(url , data )
-      .pipe(
-      map((response) => {
-      return response;
-      })
-      );
-      }
+  public update(url:any , data:any) {
+    return this.httpClient
+    .put(url , data )
+    .pipe(
+    map((response) => {
+    return response;
+    })
+    );
+  }
 }
