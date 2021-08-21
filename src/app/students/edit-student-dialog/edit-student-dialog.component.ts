@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { StudentsService } from 'src/app/service/students.service'; 
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { StudentsService } from 'src/app/service/students.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { students } from '../students.model';
 
@@ -10,91 +10,86 @@ import { students } from '../students.model';
   styleUrls: ['./edit-student-dialog.component.css']
 })
 export class EditStudentDialogComponent implements OnInit {
-  
+
   public title = 'Update User';
 
-  updateForm!: FormGroup; 
-  submitted:boolean = false;
-  user:any;
-  errorMessage:any;
+  studentId: number = -1;
+  updateForm!: FormGroup;
+  submitted: boolean = false;
+  user: any;
+  errorMessage: any;
   display: boolean = false;
+  pageMode: 'edit' | 'add' = 'add';
 
-  constructor(public formBuilder:FormBuilder,
-    public studenesService:StudentsService,
-    protected activatedRoute:ActivatedRoute,
-    private router:Router) {
+  constructor(public formBuilder: FormBuilder,
+    public studenesService: StudentsService,
+    protected activatedRoute: ActivatedRoute,
+    private router: Router) {
+    //! dont put logic in constructors unless you really have to, keep them in angular's life cycle methods such as oninit
+  }
+
+  ngOnInit(): void {
     this.createForm();
- }
+  }
 
-  ngOnInit(): void { 
-   this.activatedRoute.params.subscribe(params => {
-    // update case
-    if(typeof params['id'] !== "undefined") {
-    let id = Number.parseInt(params['id']);
-    this.studenesService.getusers("https://jsonplaceholder.typicode.com/users")
-    .subscribe(
-    response => {
-    this.user = response;
-    console.log(this.user);
-    },
-    error => {
-    this.errorMessage = error.data.message;
-    }
-    );
-    }
+  /**
+   * @param studentId: number
+   * @description this methods will be used by the parent component to display the selected student data
+   */
+  editStudent(studentId: number) {
+    this.studentId = studentId;
+    this.pageMode = 'edit';
+    this.studenesService.getStudentById(studentId).subscribe((res: any) => {
+      this.updateForm.patchValue(res[0]);
+      this.display = true;
     });
   }
 
-  public createForm(){
+  addStudent() {
+    this.pageMode = 'add';
+    this.display = true;
+  }
+
+  public createForm() {
     this.updateForm = this.formBuilder.group({
-    name: ['', Validators.required],
-    email: ['', Validators.required],
-    phone: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      phone: ['', Validators.required],
     });
   }
-      
-      
- /* onSubmit(elementValues: any) { 
-    let id:number = this.user.id;
-    this.submitted = false;
-    let url ="https://jsonplaceholder.typicode.com/users/1"
-    let data:any = {
-    "name": elementValues.name,
-    "email": elementValues.email,
-    "phone": elementValues.Phone,
-    };
-    
-    this.studenesService.update(url,data)
-    .subscribe(
-    result => {
-    this.submitted = true;
-    this.user = data;
-    alert('success : User Updated ');
-    },
-    error => {
-    this.submitted = true;
-    this.errorMessage = error;
+
+
+  onSubmit(data: students) {
+
+    /**
+     * based on https://jsonplaceholder.typicode.com/guide/
+     * When you're using their Put and post methods,
+     * The resources will not be really updated on the server but it will be faked as if
+     * so just check the returned results from the api
+     */
+
+    if (this.pageMode == 'edit') {
+      this.studenesService.update(this.studentId, data)
+        .subscribe((result) => {
+          console.warn("result", result)
+        })
     }
-    );
-  }*/
+    else {
+      // Post new data
 
-  onSubmit(data:students){
-    this.studenesService.update('https://jsonplaceholder.typicode.com/users/1',data)
-    .subscribe((result)=>{
-    console.warn("result",result)})
-    console.warn(data)
-    this.display =false;
-    
+    }
 
+    this.display = false;
   }
 
 
-  goList(){
+  goList() {
     this.router.navigate(['student'])
   }
 
   showDialog() {
-    this.display = true;}
+    this.display = true;
+  }
 
-      
+
 }
